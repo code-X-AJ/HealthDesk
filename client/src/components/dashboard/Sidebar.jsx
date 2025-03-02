@@ -17,8 +17,6 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   const toggle = () => {
-    console.log("opening.....");
-    
     setIsSidebarOpen(!isSidebarOpen);
   };
 
