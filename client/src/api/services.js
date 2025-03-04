@@ -37,7 +37,7 @@ export const medicineService = {
   },
   
   deleteMedicine: async (id) => {
-    const response = await apiClient.delete(`/medicines/${id}`);
+    const response = await apiClient.delete(`/medicines/${id}/permanent`);
     return response.data;
   }
 };

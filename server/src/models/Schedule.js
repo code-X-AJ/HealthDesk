@@ -46,7 +46,7 @@ const scheduleSchema = new mongoose.Schema(
     },
     reminderType: {
       type: String,
-      enum: ['push', 'sms', 'both'],
+      enum: ['push', 'sms', 'email', 'both'],
       default: 'push'
     },
     reminderSent: {

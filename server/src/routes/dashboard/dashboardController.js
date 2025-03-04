@@ -167,6 +167,46 @@ export const getDashboardDataPrev = async (req, res, next) => {
     todayEnd.setHours(23, 59, 59, 999);
     
     // 1. Find upcoming medicines
+    // const medicines = await Medicine.aggregate([
+    //   {
+    //     $match: {
+    //       user: new mongoose.Types.ObjectId(userId),
+    //       startDate: { $lte: now },
+    //       $or: [
+    //         { endDate: { $gte: now } },
+    //         { endDate: null }
+    //       ]
+    //     }
+    //   },
+    //   {
+    //     $unwind: "$reminders"
+    //   },
+    //   {
+    //     $match: {
+    //       "reminders.enabled": true
+    //     }
+    //   },
+    //   {
+    //     $project: {
+    //       name: 1,
+    //       dosage: 1,
+    //       time: "$reminders.time",
+    //       timeObj: { $toDate: { $concat: [{ $dateToString: { format: "%Y-%m-%d", date: now } }, "T", "$reminders.time"] } }
+    //     }
+    //   },
+    //   {
+    //     $match: {
+    //       timeObj: { $gte: now }
+    //     }
+    //   },
+    //   {
+    //     $sort: { timeObj: 1 }
+    //   },
+    //   {
+    //     $limit: 3
+    //   }
+    // ]);
+    // const medicines = await Medicine.find({user: userId});
     const medicines = await Medicine.aggregate([
       {
         $match: {
@@ -183,15 +223,28 @@ export const getDashboardDataPrev = async (req, res, next) => {
       },
       {
         $match: {
-          "reminders.enabled": true
+          "reminders.enabled": true,
+          "reminders.isActive": true
         }
       },
       {
         $project: {
-          name: 1,
-          dosage: 1,
-          time: "$reminders.time",
-          timeObj: { $toDate: { $concat: [{ $dateToString: { format: "%Y-%m-%d", date: now } }, "T", "$reminders.time"] } }
+          medicineId: 1,
+          user: 1,
+          scheduledTime: "$reminders.time",
+          periodName: "$reminders.periodName",
+          days: {
+            completed: "$reminders.completed",
+            status: "$reminders.status",
+            reminderType: "$reminders.reminderType",
+            reminderSent: "$reminders.reminderSent",
+            isActive: "$reminders.isActive"
+          },
+          timeObj: {
+            $toDate: {
+              $concat: [{ $dateToString: { format: "%Y-%m-%d", date: now } }, "T", "$reminders.time"]
+            }
+          }
         }
       },
       {
@@ -207,6 +260,7 @@ export const getDashboardDataPrev = async (req, res, next) => {
       }
     ]);
     
+      
     // 2. Find today's schedules
     const schedules = await Schedule.find({
       user: userId,
@@ -215,6 +269,8 @@ export const getDashboardDataPrev = async (req, res, next) => {
         $lte: todayEnd
       }
     }).sort({ scheduledTime: 1 }).limit(3);
+    console.log(".............", medicines);
+    console.log(".............", schedules);
     
     // Format medicines
     const upcomingMeds = medicines.map(med => {

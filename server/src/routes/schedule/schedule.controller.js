@@ -1,6 +1,8 @@
 // controllers/scheduleController.js
 import Schedule from '../../models/Schedule.js';
 import Medicine from '../../models/Medicine.js';
+import mailing from '../../services/mailing.js'
+import User from '../../models/User.js';
 
 // Get all schedules for a user
 export const getAllSchedules = async (req, res) => {
@@ -43,6 +45,8 @@ export const getTodaysSchedules = async (req, res) => {
 export const createSchedule = async (req, res) => {
   try {
     const { medicineId, time, days, reminderType, userId } = req.body;
+    console.log(req.body);
+    
     if (!medicineId || !time || !userId) {
       return res.status(400).json({ success: false, message: 'Medicine ID, time, and user ID are required' });
     }
@@ -50,6 +54,18 @@ export const createSchedule = async (req, res) => {
     if (!medicine) {
       return res.status(404).json({ success: false, message: 'Medicine not found or unauthorized' });
     }
+    const userMail = (await User.findById(userId)).email
+    console.log(userMail);
+    const subject = "Medication Reminder: Time to Take Your Medicine"
+    const message = "Hello,\nThis is a reminder to take your prescribed medicine on time.\n\nStay healthy!\n- MedEase Team";
+    // const message = "Hello,\n take your prescribed medicine on time BITCH!.\n\nStay healthy!\n- MedEase Team";
+    console.log(subject, message);
+
+    if(reminderType == "email") {
+      mailing(userMail, subject, message)
+    }
+    
+
     const newSchedule = await Schedule.create({ medicineId, user:userId, scheduledTime:time, days: days || {}, reminderType: reminderType || 'push' });
     const populatedSchedule = await Schedule.findById(newSchedule._id).populate('medicineId', 'name dosage');
     res.status(201).json(populatedSchedule);

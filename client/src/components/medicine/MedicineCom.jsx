@@ -1159,6 +1159,7 @@ const MedicineManagement = () => {
                   >
                     <option value="push">Push Notification</option>
                     <option value="sms">SMS</option>
+                    <option value="email">Email</option>
                     <option value="both">Both</option>
                   </select>
                 </div>

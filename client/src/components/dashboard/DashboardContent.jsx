@@ -26,7 +26,7 @@ const DashboardContent = () => {
         throw new Error("User not found in local storage");
       }
 
-      const user = JSON.parse(userJson);
+      const user = JSON.parse(userJson); 
       const userId = user._id;
 
       if (!userId) {

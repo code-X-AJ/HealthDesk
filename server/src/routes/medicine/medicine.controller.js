@@ -92,7 +92,6 @@ const hardDeleteMedicine = async (req, res) => {
     const { id } = req.params;
 
     const medicine = await Medicine.findByIdAndDelete(id);
-
     if (!medicine) {
       return res.status(404).json({ success: false, message: 'Medicine not found' });
     }
