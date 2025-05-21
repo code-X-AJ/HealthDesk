@@ -57,7 +57,7 @@ export const createSchedule = async (req, res) => {
     const userMail = (await User.findById(userId)).email
     console.log(userMail);
     const subject = "Medication Reminder: Time to Take Your Medicine"
-    const message = "Hello,\nThis is a reminder to take your prescribed medicine on time.\n\nStay healthy!\n- MedEase Team";
+    const message = "Hello,\nThis is a reminder to take your prescribed medicine on time.\n\nStay healthy!\n- HealthDesk Team";
     // const message = "Hello,\n take your prescribed medicine on time BITCH!.\n\nStay healthy!\n- MedEase Team";
     console.log(subject, message);
 

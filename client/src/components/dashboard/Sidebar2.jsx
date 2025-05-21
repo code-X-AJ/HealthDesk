@@ -46,7 +46,7 @@ function Sidebar2() {
       <div className="flex items-center space-x-2">
         <Stethoscope className="text-teal-600" size={24} />
         <h1 className={`font-bold text-xl bg-gradient-to-r from-teal-600 to-blue-600 bg-clip-text text-transparent transition-opacity duration-300 ${!isSidebarOpen && 'opacity-0'}`}>
-          MedEase
+          HealthDesk
         </h1>
       </div>
     </div>

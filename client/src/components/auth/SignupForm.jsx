@@ -189,7 +189,7 @@ const AuthPages = () => {
           <div className="flex items-center justify-center space-x-3">
             <Stethoscope className="text-teal-600 animate-pulse" size={40} />
             <h1 className="text-4xl font-bold bg-gradient-to-r from-teal-600 to-blue-600 bg-clip-text text-transparent">
-              MedEase
+              HealthDesk
             </h1>
           </div>
           <p className="text-gray-600 mt-2">Medicine Tracking Made Simple</p>

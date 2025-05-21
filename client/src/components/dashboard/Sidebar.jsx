@@ -55,7 +55,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
               ${!isOpen ? "opacity-0 w-0" : "opacity-100 w-auto"}
             `}
             >
-              MedEase
+              HealthDesk
             </h1>
           </div>
           <button
