@@ -626,10 +626,12 @@ const MedicineManagement = () => {
   const handleDeleteMedicine = async (medicineId) => {
     try {
       setLoading(true);
-      await medicineService.deleteMedicine(medicineId);
+      const ans = await medicineService.deleteMedicine(medicineId);
+      console.log(ans);
       
       // Update medicines list by removing the deleted medicine
       setMedicines(medicines.filter(med => med._id !== medicineId));
+      setSchedules(schedules.filter(schedule => schedule._id !== ans.schedId));
       setError(null);
     } catch (err) {
       console.error('Error deleting medicine:', err);

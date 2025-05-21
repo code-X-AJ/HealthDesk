@@ -1,4 +1,5 @@
 import Medicine from '../../models/Medicine.js';
+import Schedule from '../../models/Schedule.js';
 
 // Get all medicines for a user
 const getAllMedicines = async (req, res) => {
@@ -91,12 +92,15 @@ const hardDeleteMedicine = async (req, res) => {
   try {
     const { id } = req.params;
 
+    const sched = await Schedule.findOneAndDelete({medicineId: id})
+    console.log(sched);
+    
     const medicine = await Medicine.findByIdAndDelete(id);
     if (!medicine) {
       return res.status(404).json({ success: false, message: 'Medicine not found' });
     }
 
-    res.status(200).json({ success: true, message: 'Medicine permanently deleted' });
+    res.status(200).json({ success: true, message: 'Medicine permanently deleted', schedId: sched._id });
   } catch (error) {
     console.error('Error permanently deleting medicine:', error);
     res.status(500).json({ success: false, message: 'Failed to permanently delete medicine', error: error.message });
