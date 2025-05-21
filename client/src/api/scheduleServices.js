@@ -1,7 +1,7 @@
 // api/scheduleServices.js
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000/api';
+const API_URL = 'https://healthdesk.onrender.com/api';
 
 // Create an axios instance
 const apiClient = axios.create({
