@@ -1,4 +1,3 @@
-import React from "react";
 import Schedule from "../../components/schedule/Schedule";
 import ProfileLayout from "../../components/profile/ProfileLayout";
 import Sidebar2 from "../../components/dashboard/Sidebar2";
@@ -24,8 +23,20 @@ import {
   LogOut,
   Stethoscope,
 } from "lucide-react";
+import React, { useEffect } from "react";
+
+import { useNavigate } from "react-router-dom";
 
 function ProfilePage() {
+
+  const navigate = useNavigate();
+  
+  // useEffect(()=>{
+  //   if(!localStorage.getItem('user')){
+  //     navigate("/auth")
+  //   }
+  // })
+
   return (
     <div>
       <div className="flex min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 ">

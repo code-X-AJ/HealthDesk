@@ -30,8 +30,18 @@ import {
   User,
 } from "lucide-react";
 // import { Alert } from '@/components/ui/alert';
+import { useNavigate } from "react-router-dom";
 
 const MedMartComingSoon = () => {
+  
+  // const navigate = useNavigate();
+  
+  // useEffect(()=>{
+  //   if(!localStorage.getItem('user')){
+  //     navigate("/auth")
+  //   }
+  // })
+
   const [isVisible, setIsVisible] = useState(false);
   const [email, setEmail] = useState("");
   const [isNotifying, setIsNotifying] = useState(false);

@@ -445,7 +445,7 @@ import {
   Trash2,
   Edit
 } from 'lucide-react';
-import { medicineService, scheduleService, dashboardService } from '../../api//services';
+import { medicineService, scheduleService, dashboardService } from '../../api/services';
 
 const MedicineManagement = () => {
   const [showAddMedicine, setShowAddMedicine] = useState(false);
